@@ -40,6 +40,7 @@ services:
     networks:
       - web
       - default
+      - traefik
 
   whoami:
     image: "containous/whoami"
@@ -56,3 +57,4 @@ services:
 networks:
   web:
     external: true
+  traefik:
