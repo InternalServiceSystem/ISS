@@ -11,7 +11,7 @@ services:
       - AWS_HOSTED_ZONE_ID
     command: 
       - "--api.insecure=true"
-      #- "--loglevel=debug"
+      - "--log.level=debug"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker"
       - "--entrypoints.web.address=:80"
@@ -39,8 +39,6 @@ services:
 
     networks:
       - web
-      - default
-      - traefik
 
   whoami:
     image: "containous/whoami"
@@ -53,8 +51,9 @@ services:
       - "traefik.http.routers.whoami.entrypoints=websecure"
       - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
       - "traefik.port=80"
+    networks:
+      - web
 
 networks:
   web:
     external: true
-  traefik:
